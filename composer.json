@@ -1,0 +1,24 @@
+{
+    "name": "forge-media/forge-tsm",
+    "type": "web-app",
+    "description": "Simple web-front which allows the creation of channels on a Teamspeak 3 server",
+    "keywords": ["ts3", "php", "heroku", "c9.io", "teamspeak3"],
+    "minimum-stability": "dev",
+    "homepage": "https://github.com/forge-media/forgetsm-php-framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Forge Media"
+        },
+        {
+            "name": "Forge Media",
+            "email": "admin@forgegaming.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "API\\": "API/" }
+    },
+    "require": {
+        "php": ">=5.3.3"
+    }
+}
