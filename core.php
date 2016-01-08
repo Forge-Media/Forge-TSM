@@ -43,10 +43,19 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 
 	#set bot name
 	$tsAdmin->setName($botName);
-
+	
+	$data = array(
+		"channel_name" => "Test3",
+ 		"channel_topic" => "This is a top-level channel",
+		"channel_flag_permanent" => 1);
+	
 	#Set message for TS & Web
 	$tsmessage = 'Success';
-  	echo $tsmessage;
+  	print_r($tsmessage);
+	
+	#Create channel
+	$output = $tsAdmin->channelCreate($data);
+	print_r($output['data']);
     
   	#send message to Teamspeak
 	$tsAdmin->sendMessage($mode, $target, $tsmessage);

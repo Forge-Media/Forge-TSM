@@ -1,4 +1,5 @@
-/bootstrap/compiled.php
+/bower_components
+/node_modules
 /vendor
 
 
@@ -23,9 +24,6 @@ php.ini
 
 /app/config/packages
 /public/packages
-
-
-/node_modules
 
 
 .env

@@ -18,5 +18,17 @@
     "require": {
         "php": ">=5.5",
         "forge-media/forgetsm-php-framework": "dev-master"
+    },
+    "dependencies": {
+        "bower": "1.7.2"
+    },
+    "scripts": {
+        "postinstall": "bower install",
+        "post-install-cmd": [
+            "bower install"
+        ],
+        "post-update-cmd": [
+            "bower install"
+        ]
     }
 }
