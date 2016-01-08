@@ -31,7 +31,7 @@ $botName = $configs['botName'];
 /*------------------------------------*/
 
 #Include ts3admin.class.php
-require("vendor/forge-media/API/TeamSpeak3.php");
+require("vendor/forge-media/forgetsm-php-framework/API/TeamSpeak3.php");
 
 #build a new ts3admin object
 $tsAdmin = new ts3admin($ts3_ip, $ts3_queryport);
