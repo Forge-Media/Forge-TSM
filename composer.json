@@ -15,10 +15,8 @@
             "email": "admin@forgegaming.net"
         }
     ],
-    "autoload": {
-        "psr-4": { "API\\": "API/" }
-    },
     "require": {
-        "php": ">=5.6"
+        "php": ">=5.5",
+        "forge-media/forgetsm-php-framework": "dev-master"
     }
 }
