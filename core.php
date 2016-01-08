@@ -16,9 +16,6 @@ Don't forget to edit & rename the CONFIG.PHP.Template to config.php!
 
 $configs = include('config.php');
 
-print_r($configs);
-
-
 /*-------Please edit config.php-------*/
 $ts3_ip = $configs['ip'];
 $ts3_queryport = $configs['queryport'];
