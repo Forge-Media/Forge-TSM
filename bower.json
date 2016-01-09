@@ -1,6 +1,6 @@
 {
-    "name": "forge-TSM",
+    "name": "multitest",
     "dependencies": {
-        "angular-bootstrap": "~1.0.0"
+        "bootstrap": "*"
     }
 }

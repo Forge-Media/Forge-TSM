@@ -1,7 +1,6 @@
 {
 	"name": "multitest",
 	"require": {
-		"forge-media/forgetsm-php-framework": "dev-master",
 		"monolog/monolog": "~1.8"
 	},
 	"require-dev": {
