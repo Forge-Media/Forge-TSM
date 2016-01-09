@@ -28,7 +28,8 @@
     },
     "scripts": {
         "start": "node index.js",
-        "postinstall": "bower install",
+        "test": "mocha",
+        "postinstall": "bower install && grunt build",
         "post-install-cmd": [
             "bower install"
         ],
