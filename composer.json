@@ -1,7 +1,8 @@
 {
 	"name": "multitest",
 	"require": {
-		"monolog/monolog": "~1.8"
+		"monolog/monolog": "~1.8",
+		"forge-media/forgetsm-php-framework": "dev-master"
 	},
 	"require-dev": {
 		"heroku/heroku-buildpack-php": "*"

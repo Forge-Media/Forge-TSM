@@ -1,6 +1,6 @@
 {
     "name": "multitest",
     "dependencies": {
-        "bootstrap": "*"
+        "angular-bootstrap": "~1.0.0"
     }
 }
