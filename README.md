@@ -1,40 +1,24 @@
+# heroku-multipack-nodejs-php-example
 
-# ForgeTSM 0.1.0
-## FGN is committed to the ForgeTSM Branch!
+This sample application for Heroku shows how [heroku/heroku-buildpack-multi](https://github.com/heroku/heroku-buildpack-multi) can be used to combine the [Node.js](https://github.com/heroku/heroku-buildpack-nodejs) and [PHP](https://github.com/heroku/heroku-buildpack-php) buildpacks, which allows using Node from inside the PHP buildpack's `bin/compile`.
 
-### By Jeremy Paton & Marc Berman
+In this example, we're using [Bower](http://bower.io) in a [Composer](http://getcomposer.org) [post-install-cmd](https://getcomposer.org/doc/articles/scripts.md) to install [Bootstrap](http://getbootstrap.com).
 
-Copyright (c) Forge Gaming Network 2015
+To try it out, clone this repo, run `heroku create --buildpack https://github.com/heroku/heroku-buildpack-multi`, then `git push heroku master`. If you want to port this to an existing app, you'll need to `heroku config:set BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-multi`.
 
-Welcome to ForgeTSM, a Teamspeak 3 channel creator web-app based on PHP & ts3admin.class, developed using Cloud9 & deployable to Heroku. We intend to either use AngularJS or Bootstrap for the frontend, however thats all in the future right now we are focused on the backend. 
+You can also quickly deploy a version of this example to Heroku by clicking the button below:
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-What is ForgeCP
------------------
-More info coming soon!
+Example: [http://heroku-multipack-nodejs-php-ex.herokuapp.com/](http://heroku-multipack-nodejs-php-ex.herokuapp.com/)
 
-By utilising  ts3admin.class the ForgeCP panel requires no server side application or integration and communicates directly with a TS3 server via Server Query.
+## How it works
 
-User Features
--------------
-What ForgeCP beta will offer:
-- Dynamic hierarchical channel creation
-- Thats is all for v0.1
-
-Screenshots
------------------
-Coming soon!
-
-Requirments
---------------
-- php 5.4 minimum
-
-Installation
---------------
-- Still to be decided hopefully we will offer a deploy-to-heroku directly option
-
-
-Change Log - v0.1.0
--------------------
-
-No Changes
+1. The file `.buildpacks` instructs the Multi Buildpack which buildpacks to run in sequence
+1. The Node.js buildpack installs Bower using NPM (see `package.json`/`npm-shrinkwrap.json`)
+1. The Node.js buildpack makes its binaries available to the next buildpack in the chain
+1. The PHP buildpack runs and installs dependencies using Composer
+1. As part of the composer install step, the `post-install-cmd` scripts run
+1. That executes `$(npm bin -q)/bower install` - `bower install` would work too, as `node_modules/.bin` is on `$PATH` on Heroku, but it would likely not work on local development environments, hence the more portable use of prefixing the result from `npm bin -q` to retrieve said directory name.
+1. Bower installs Bootstrap
+1. Done!

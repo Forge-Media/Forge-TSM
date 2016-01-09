@@ -1,24 +1,6 @@
 {
-  "name": "forge-tsm",
-  "homepage": "https://github.com/Forge-Media/Forge-TSM",
-  "authors": [
-    "Forge-Media <Jeremy@jesararts.net>"
-  ],
-  "description": "Simple web-front which allows the creation of channels on a Teamspeak 3 server",
-  "main": "",
-  "moduleType": [],
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests",
-    "config.php",
-    "composer.json"
-  ],
-  "dependencies": {
-    "angular-bootstrap": "~1.0.0"
-  }
+    "name": "multitest",
+    "dependencies": {
+        "bootstrap": "*"
+    }
 }
