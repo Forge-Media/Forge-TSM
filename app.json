@@ -1,0 +1,19 @@
+{
+    "name": "forge-media/forge-tsm",
+    "description": "Simple web-front which allows the creation of channels on a Teamspeak 3 server",
+    "keywords": [
+        "heroku",
+        "buildpack",
+        "PHP",
+        "Composer",
+        "Node.js",
+        "npm",
+        "Bower"
+    ],
+    "website": "https://github.com/Forge-Media/Forge-TSM",
+    "repository": "https://github.com/Forge-Media/Forge-TSM",
+    "success_url": "/",
+    "env": {
+        "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-multi"
+    }
+}

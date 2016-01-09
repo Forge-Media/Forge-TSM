@@ -21,13 +21,15 @@
         "nmp": "2.14.x"
     },
     "require": {
-        "php": ">=5.5",
-        "forge-media/forgetsm-php-framework": "dev-master"
+        "forge-media/forgetsm-php-framework": "dev-master",
+        "monolog/monolog": "~1.8"
     },
-    "dependencies": {
-        "bower": "latest"
-    },
-    "scripts": {
-        "postinstall": "./node_modules/bower/bin/bower install"
-    }
+    "require-dev": {
+		"heroku/heroku-buildpack-php": "*"
+	},
+	"scripts": {
+		"compile": [
+			"bower install"
+		]
+	}
 }
