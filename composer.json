@@ -18,18 +18,16 @@
     ],
     "engines": {
         "node": "4.1.1",
-        "nmp": "2.14.x"
+        "nmp": "2.14.x",
+        "php": ">=5.5"
     },
     "require": {
-        "forge-media/forgetsm-php-framework": "dev-master",
-        "monolog/monolog": "~1.8"
+        "forge-media/forgetsm-php-framework": "dev-master"
     },
-    "require-dev": {
-		"heroku/heroku-buildpack-php": "*"
-	},
-	"scripts": {
-		"compile": [
-			"bower install"
-		]
-	}
+    "dependencies": {
+        "bower": "1.5.x"
+    },
+    "scripts": {
+        "postinstall": "bower install"
+    }
 }
