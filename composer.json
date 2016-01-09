@@ -1,6 +1,7 @@
 {
     "name": "forge-media/forge-tsm",
     "type": "web-app",
+    "version": "0.1.0",
     "description": "Simple web-front which allows the creation of channels on a Teamspeak 3 server",
     "keywords": ["ts3", "php", "heroku", "c9.io", "teamspeak3"],
     "minimum-stability": "dev",
@@ -27,14 +28,6 @@
         "bower": "latest"
     },
     "scripts": {
-        "start": "node index.js",
-        "test": "mocha",
-        "postinstall": "bower install && grunt build",
-        "post-install-cmd": [
-            "bower install"
-        ],
-        "post-update-cmd": [
-            "bower install"
-        ]
+        "postinstall": "bower install"
     }
 }

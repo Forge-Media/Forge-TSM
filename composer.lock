@@ -1,0 +1,68 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "03513121cc17c8ce424d160a5709b0c0",
+    "content-hash": "0a8d0e4a3d4c193c79b25a1cb34f7259",
+    "packages": [
+        {
+            "name": "forge-media/forgetsm-php-framework",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Forge-Media/forgetsm-php-framework.git",
+                "reference": "0e934047e0061ff2b64db5f8184fba3b364e9e64"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Forge-Media/forgetsm-php-framework/zipball/0e934047e0061ff2b64db5f8184fba3b364e9e64",
+                "reference": "0e934047e0061ff2b64db5f8184fba3b364e9e64",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "API\\": "API/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL2"
+            ],
+            "authors": [
+                {
+                    "name": "Forge Media"
+                },
+                {
+                    "name": "Forge Media",
+                    "email": "admin@forgegaming.net"
+                }
+            ],
+            "description": "Clone of TS3 ADMIN PHP Framework 0.8.0.0 providing the library as composer project.",
+            "homepage": "https://github.com/forge-media/forgetsm-php-framework",
+            "keywords": [
+                "heroku",
+                "php",
+                "ts3"
+            ],
+            "time": "2016-01-07 22:21:32"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "forge-media/forgetsm-php-framework": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.5"
+    },
+    "platform-dev": []
+}
