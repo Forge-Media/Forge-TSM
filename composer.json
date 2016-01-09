@@ -28,6 +28,7 @@
         "bower": "latest"
     },
     "scripts": {
+        "start": "node index.js",
         "postinstall": "bower install"
     }
 }
