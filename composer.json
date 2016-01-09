@@ -16,16 +16,18 @@
         }
     ],
     "engines": {
-        "npm": "4.1.1"
+        "node": "4.1.1",
+        "nmp": "2.14.x"
     },
     "require": {
         "php": ">=5.5",
         "forge-media/forgetsm-php-framework": "dev-master"
     },
+    "dependencies": {
+        "bower": "1.5.x"
+    },
     "scripts": {
-        "start": "node index.js",
-        "test": "mocha",
-        "postinstall": "bower install && grunt build",
+    "postinstall": "node_modules/.bin/bower install",
         "post-install-cmd": [
             "bower install"
         ],
