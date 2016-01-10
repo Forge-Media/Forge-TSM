@@ -72,27 +72,43 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 
 	#login as serveradmin
 	$tsAdmin->login($ts3_user, $ts3_pass);
+	
 	#select teamspeakserver
 	$tsAdmin->selectServer($ts3_port);
+	
 	#set bot name
 	$tsAdmin->setName($botName);
 	
+	
 	#Create channel
+	//Check that there is channel information to be used
 	if (!empty($channel_info)) {
+		
+		//Loop through array to create each channel
 		foreach ($channel_info as $key => $value) {
+			
+			//Merge custom channel information with default settings
 			$merged_array = $value + $channel_deafults; // preserves keys
+			
+			//If first channel create Master-Parent channel
 			if ($key === 0) {
-				$parent_id = createChannel($tsAdmin, $merged_array);
-				setPerms($parent_id, $tsAdmin, $permissions_deafult);
+				
+				//Create Channel Function: Create channel + record channels CID for parenting
+				$parent_id = createChannel($tsAdmin, $merged_array, $permissions_deafult);
+			
+			//Create sub-channels of Master-Parent channel
 			} else {
+				
+				//Add Master-Parent CID to channel information
 				$merged_array = $merged_array + $arrayName = array("cpid" => $parent_id['data']['cid']);
-				$output = createChannel($tsAdmin, $merged_array);
-				setPerms($output, $tsAdmin, $permissions_deafult);
+				
+				//Create Channel Function: create sub-channel
+				createChannel($tsAdmin, $merged_array, $permissions_deafult); //Will require an extra IF check to see if channel is also a parent channel!
 			}
 		}
 	
 	} else {
-		echo 'Error: No channel information has been entered';
+		echo 'API Error: No channel information has been entered, cannot create channels <br>';
 	}
 	
 
@@ -102,25 +118,56 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 	#$tsAdmin->sendMessage($mode, $target, $tsmessage);
 	} else{
 
-	 echo 'Connection could not be established.';
+	 echo 'Application could not establish a connection to the TS Server with IP: '.$ts3_ip.'<br>';
 
 }
 
 /*-------Functions-------*/
-	function createChannel($tsAdminF, $array) {
-		return	$tsAdminF->channelCreate($array);	
+
+	//Create Channel Function (TS_Object, Channel_Information, Channel_Permissions)
+	function createChannel($tsAdminF, $array, $perms) {
+		
+		//Create + Record the created channel's CID
+		$result = $tsAdminF->channelCreate($array);
+		
+		//If channel creation succeeds continue
+		if ($result['success'] === TRUE){
+			
+			echo 'Channel: '.$array['channel_name'].' - successfully created';
+			
+			setPerms($tsAdminF, $result, $perms);
+			
+		//If channel creation fails echo error
+		} else {
+			echo 'Function Error: Channel creation failure';
+		}
+		return $result;
+			
 	}
 	
-	function setPerms($cid, $tsAdminF, $perms) {
-		if($cid['success'] === TRUE){
-			return $tsAdminF->channelAddPerm($cid['data']['cid'], $perms);
+	
+	//Set Permissions Function (TS_Object, Channel_ID, Channel_Permissions)
+	function setPerms($tsAdminF, $cid, $perms) {
+
+		//Set created channel's permissions
+		$result = $tsAdminF->channelAddPerm($cid['data']['cid'], $perms);
+		
+
+		//If set perms fails echo error
+		if($result['success'] === TRUE){
+			
+			echo ' and permissions successfully set <br>';
+			
+		} else {
+			echo ' Function Error: Channel set permission failure <br>'; //	
 		}
 	}
-	
+
+
 #This code retuns all errors from the debugLog
 if(count($tsAdmin->getDebugLog()) > 0) {
 
-	$errors = 'Errors:<br>';
+	$errors = 'TS Server Error Log:<br>';
 
 	foreach($tsAdmin->getDebugLog() as $logEntry) {
 
