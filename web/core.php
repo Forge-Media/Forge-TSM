@@ -8,6 +8,8 @@
 /_/    \____/_/   \__, /\___/_/  /____/_/  /_/______   
                  /____/                          
 
+Version: 0.1.0
+
 Simple web-front which allows the creation of channels on a Teamspeak 3 server
 by Jeremy Paton & Marc Berman
 
@@ -25,7 +27,40 @@ $ts3_port = $configs['port'];
 $mode = $configs['mode']; #1: send to client | 2: send to channel | 3: send to server
 $target = $configs['target']; #serverID
 $botName = $configs['botName'];
-/*------------------------------------*/
+
+$channel_deafults = array(
+ 	"channel_flag_permanent" => 1,
+ 	"channel_codec" => 4,
+ 	"channel_codec_quality" => 6
+ 	);
+ 		
+$permissions_deafult = array(
+	"i_channel_needed_delete_power" => '75',
+	"i_channel_needed_permission_modify_power" => '70'
+	);
+
+
+	$channel_info = array(
+		'0' => array (
+        	'channel_name' => "[cspacer000] Clan Name",
+        	'channel_topic' => "This is a sub-level channel",
+		),
+    	'1' => array (
+        	'channel_name' => "Clan Channel 01",
+        	'channel_topic' => "This is a sub-level channel",
+    	),
+    	'2' => array (
+        	'channel_name' => "Clan Channel 02",
+        	'channel_topic' => "This is a sub-level channel",
+    	),
+		'3' => array (
+        	'channel_name' => "Clan Channel 03",
+        	'channel_topic' => "This is a sub-level channel",
+    	)
+ 		
+	);
+	
+/*-------TS3 Object-------*/
 
 #Include ts3admin.class.php
 require("../vendor/autoload.php");
@@ -37,37 +72,51 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 
 	#login as serveradmin
 	$tsAdmin->login($ts3_user, $ts3_pass);
-
 	#select teamspeakserver
 	$tsAdmin->selectServer($ts3_port);
-
 	#set bot name
 	$tsAdmin->setName($botName);
 	
-	$data = array(
-		"channel_name" => "Test3",
- 		"channel_topic" => "This is a top-level channel",
-		"channel_flag_permanent" => 1);
-	
-	#Set message for TS & Web
-	$tsmessage = 'Success';
-  	print_r($tsmessage);
-	
 	#Create channel
-	$output = $tsAdmin->channelCreate($data);
-	print_r($output['data']);
-    
-  	#send message to Teamspeak
-	$tsAdmin->sendMessage($mode, $target, $tsmessage);
-  }
+	if (!empty($channel_info)) {
+		foreach ($channel_info as $key => $value) {
+			$merged_array = $value + $channel_deafults; // preserves keys
+			if ($key === 0) {
+				$parent_id = createChannel($tsAdmin, $merged_array);
+				setPerms($parent_id, $tsAdmin, $permissions_deafult);
+			} else {
+				$merged_array = $merged_array + $arrayName = array("cpid" => $parent_id['data']['cid']);
+				$output = createChannel($tsAdmin, $merged_array);
+				setPerms($output, $tsAdmin, $permissions_deafult);
+			}
+		}
+	
+	} else {
+		echo 'Error: No channel information has been entered';
+	}
+	
 
-  else{
+	#Set message for TS & Web
+	#$tsmessage = 'Success';
+	#send message to Teamspeak
+	#$tsAdmin->sendMessage($mode, $target, $tsmessage);
+	} else{
 
 	 echo 'Connection could not be established.';
 
 }
 
-
+/*-------Functions-------*/
+	function createChannel($tsAdminF, $array) {
+		return	$tsAdminF->channelCreate($array);	
+	}
+	
+	function setPerms($cid, $tsAdminF, $perms) {
+		if($cid['success'] === TRUE){
+			return $tsAdminF->channelAddPerm($cid['data']['cid'], $perms);
+		}
+	}
+	
 #This code retuns all errors from the debugLog
 if(count($tsAdmin->getDebugLog()) > 0) {
 

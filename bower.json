@@ -1,6 +1,7 @@
 {
-    "name": "multitest",
-    "dependencies": {
-        "angular-bootstrap": "~1.0.0"
-    }
+  "name": "multitest",
+  "dependencies": {
+    "angular-bootstrap": "~1.0.0",
+    "bootstrap": "~3.3.6"
+  }
 }
