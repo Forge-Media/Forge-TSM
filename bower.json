@@ -1,5 +1,6 @@
 {
-  "name": "multitest",
+  "name": "Forge-TSM",
+  "description": "Simple web-front which allows the creation of channels on a Teamspeak 3 server.",
   "dependencies": {
     "angular-bootstrap": "~1.0.0",
     "bootstrap": "~3.3.6"
