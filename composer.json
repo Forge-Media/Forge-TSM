@@ -1,5 +1,5 @@
 {
-	"name": "Forge-Media/Forge-TSM",
+	"name": "Forge-TSM",
 	"description": "Simple web-front which allows the creation of channels on a Teamspeak 3 server.",
 	"require": {
 		"monolog/monolog": "~1.8",
