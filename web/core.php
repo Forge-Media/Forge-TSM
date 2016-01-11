@@ -48,14 +48,17 @@ $permissions_deafult = array(
     	'1' => array (
         	'channel_name' => "Clan Channel 01",
         	'channel_topic' => "This is a sub-level channel",
+        	'cpid' => '',
     	),
     	'2' => array (
         	'channel_name' => "Clan Channel 02",
         	'channel_topic' => "This is a sub-level channel",
+        	'cpid' => 1,
     	),
 		'3' => array (
         	'channel_name' => "Clan Channel 03",
         	'channel_topic' => "This is a sub-level channel",
+        	'cpid' => 1,
     	)
  		
 	);
@@ -91,7 +94,7 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 			$merged_array = $value + $channel_deafults; // preserves keys
 			
 			//If first channel create Master-Parent channel
-			if ($key === 0) {
+			if ($key == 0) {
 				
 				//Create Channel Function: Create channel + record channels CID for parenting
 				$parent_id = createChannel($tsAdmin, $merged_array, $permissions_deafult);
@@ -177,5 +180,3 @@ if(count($tsAdmin->getDebugLog()) > 0) {
 	echo $errors;
 
 }
-
-?>
