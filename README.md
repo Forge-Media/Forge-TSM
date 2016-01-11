@@ -1,6 +1,6 @@
 [![Code Climate](https://codeclimate.com/github/Forge-Media/Forge-TSM/badges/gpa.svg)](https://codeclimate.com/github/Forge-Media/Forge-TSM)
 [![DevDependencies](https://david-dm.org/Forge-Media/Forge-TSM.svg)](https://david-dm.org/Forge-Media/Forge-TSM.svg)
-[![Heroku](https://heroku-badge.herokuapp.com/?app=forge-tsm)]
+[![Heroku](http://heroku-badge.herokuapp.com/?app=forge-tsm=flat)](http://heroku-badge.herokuapp.com/?app=forge-tsm=flat)
 
 # ForgeTSM 0.1.0 *Development*
 ## For development purposes only (Based on heroku-multipack-nodejs-php-example)
