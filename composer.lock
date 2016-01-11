@@ -4,12 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "871b373b98d996949e02884eadf915c9",
-    "content-hash": "634ce3f992cedc7e78c311e87c974907",
+    "hash": "18605efd71a102247fde06c77ece5b68",
+    "content-hash": "b26f7e959433bd4e8b3a9c0360e574bf",
     "packages": [
         {
             "name": "forge-media/forgetsm-php-framework",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Forge-Media/forgetsm-php-framework.git",
@@ -216,9 +216,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "forge-media/forgetsm-php-framework": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
