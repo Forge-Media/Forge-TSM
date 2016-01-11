@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "forge-media/forgetsm-php-framework",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Forge-Media/forgetsm-php-framework.git",
-                "reference": "6fda49809f975c7913a407ff37688db443de0d10"
+                "reference": "02ad10fa1b82ed23cd4594f60f513fa3421c1276"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Forge-Media/forgetsm-php-framework/zipball/6fda49809f975c7913a407ff37688db443de0d10",
-                "reference": "6fda49809f975c7913a407ff37688db443de0d10",
+                "url": "https://api.github.com/repos/Forge-Media/forgetsm-php-framework/zipball/02ad10fa1b82ed23cd4594f60f513fa3421c1276",
+                "reference": "02ad10fa1b82ed23cd4594f60f513fa3421c1276",
                 "shasum": ""
             },
             "require": {
@@ -50,7 +50,7 @@
                 "php",
                 "ts3"
             ],
-            "time": "2016-01-09 17:57:07"
+            "time": "2016-01-10 23:54:51"
         },
         {
             "name": "monolog/monolog",
