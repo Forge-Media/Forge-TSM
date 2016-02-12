@@ -42,19 +42,19 @@ $permissions_deafult = array(
 
 	$channel_info = array(
 		'0' => array (
-        	'channel_name' => "[cspacer000] Clan Name",
-        	'channel_topic' => "This is a sub-level channel",
+        	'channel_name' => "[cspacer000] Channel Name",
+        	'channel_topic' => "Throws on the Go",
 		),
-    	'1' => array (
-        	'channel_name' => "Clan Channel 01",
+		'1' => array (
+        	'channel_name' => "Channel 01",
         	'channel_topic' => "This is a sub-level channel",
     	),
     	'2' => array (
-        	'channel_name' => "Clan Channel 02",
+        	'channel_name' => "Channel 02",
         	'channel_topic' => "This is a sub-level channel",
     	),
-		'3' => array (
-        	'channel_name' => "Clan Channel 03",
+    	'3' => array (
+        	'channel_name' => "Channel 03",
         	'channel_topic' => "This is a sub-level channel",
     	)
  		
@@ -95,7 +95,8 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 				
 				//Create Channel Function: Create channel + record channels CID for parenting
 				$parent_id = createChannel($tsAdmin, $merged_array, $permissions_deafult);
-			
+				moveClients($tsAdmin, $parent_id);
+				
 			//Create sub-channels of Master-Parent channel
 			} else {
 
@@ -162,7 +163,45 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 			echo ' Function Error: Channel set permission failure <br>'; //	
 		}
 	}
+	
 
+	function moveClients($tsAdminF, $cid) {
+
+		//Set channel group (to be passed in future)
+		$sgid = 124;
+		 
+		 //Set up the array of all members in the set channel group (must be true)
+		$clientsarray =  $tsAdminF->serverGroupClientList($sgid, $names = true);
+		
+		//If the client array is populated succesfully continue
+		if ($clientsarray['success'] === TRUE) {
+
+			//Loop through client array's data array
+			foreach ($clientsarray['data'] as $value) {
+			
+			 	//If the index value is not empty continue
+				if (!empty($value['client_unique_identifier'])) {
+					
+					//Get each Client Unique ID from the client array
+					$cuid = $value['client_unique_identifier'];
+
+					//Find the Client ID Array based on the Client Unique ID
+					$clinetidsarray = $tsAdminF->clientGetIds($cuid);
+					
+					//Make sure user is online
+					if (empty($clinetidsarray['errors'])) {
+						//Set the Client ID
+						$clid = $clinetidsarray['data'][0]['clid'];
+						
+						//Move the selected client to the new Parent channel & return result
+						$tsAdminF->clientMove($clid, $cid['data']['cid']);		
+					}
+			 	}
+			}
+		} else {
+			echo ' Function Error: Could not populate ($clientsarray) with provided server Group ID<br>';
+		}
+	}
 
 #This code retuns all errors from the debugLog
 if(count($tsAdmin->getDebugLog()) > 0) {
@@ -177,3 +216,6 @@ if(count($tsAdmin->getDebugLog()) > 0) {
 	echo $errors;
 
 }
+
+#Logout
+$tsAdmin->logout();	
