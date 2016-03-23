@@ -35,6 +35,7 @@ $channel_deafults = array(
  	);
  		
 $permissions_deafult = array(
+	"i_channel_needed_join_power" => '35',
 	"i_channel_needed_delete_power" => '75',
 	"i_channel_needed_permission_modify_power" => '70'
 	);
@@ -57,7 +58,6 @@ $permissions_deafult = array(
         	'channel_name' => "Channel 03",
         	'channel_topic' => "This is a sub-level channel",
     	)
- 		
 	);
 	
 /*-------TS3 Object-------*/
@@ -107,7 +107,6 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 				createChannel($tsAdmin, $merged_array, $permissions_deafult); //Will require an extra IF check to see if channel is also a parent channel!
 			}
 		}
-	
 	} else {
 		echo 'API Error: No channel information has been entered, cannot create channels <br>';
 	}
