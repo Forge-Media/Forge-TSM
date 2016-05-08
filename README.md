@@ -32,6 +32,12 @@ How it works
 3. The Node.js buildpack makes its binaries available to the next buildpack in the chain
 4. The PHP buildpack runs and installs dependencies using Composer
 5. As part of the composer install step, the `post-install-cmd` scripts run
-1. That executes `$(npm bin -q)/bower install` - `bower install` would work too, as `node_modules/.bin` is on `$PATH` on Heroku, but it would likely not work on local development environments, hence the more portable use of prefixing the result from `npm bin -q` to retrieve said directory name.
-1. Bower installs Bootstrap
-1. Done!
+6. That executes `$(npm bin -q)/bower install` - `bower install` would work too, as `node_modules/.bin` is on `$PATH` on Heroku, but it would likely not work on local development environments, hence the more portable use of prefixing the result from `npm bin -q` to retrieve said directory name.
+7. Bower installs Bootstrap
+8. Done!
+
+
+Change Log - v0.2.0
+-------------------
+
+[Older changes](CHANGELOG.md)
