@@ -16,6 +16,10 @@ by Jeremy Paton & Marc Berman
 Don't forget to edit & rename the CONFIG.PHP.Template to config.php!
 */
 
+header("ContentType:application/json");
+
+if ($_POST) {
+
 $configs = include('config.php');
 
 /*-------Please edit config.php-------*/
@@ -41,7 +45,7 @@ $permissions_deafult = array(
 	"i_channel_needed_permission_modify_power" => '70'
 	);
 
-
+/*
 	$channel_info = array(
 		'0' => array (
         	'channel_name' => "[cspacer000] Channel Name",
@@ -61,6 +65,9 @@ $permissions_deafult = array(
     	)
  		
 	);
+*/
+	
+$channel_info = $_POST['data'];
 	
 /*-------TS3 Object-------*/
 
@@ -114,7 +121,8 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 		createSpacer($tsAdmin);
 	
 	} else {
-		echo 'API Error: No channel information has been entered, cannot create channels <br>';
+		echo json_encode(array('status' => 'error', 'message' => 'API Error: No channel information has been entered, cannot create channels'));
+
 	}
 	
 
@@ -124,7 +132,7 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 	#$tsAdmin->sendMessage($mode, $target, $tsmessage);
 	} else{
 
-	 echo 'Application could not establish a connection to the TS Server with IP: '.$ts3_ip.'<br>';
+	echo json_encode(array('status' => 'error', 'message' => 'Application could not establish a connection to the TS Server with IP: '.$ts3_ip));
 
 }
 
@@ -139,13 +147,13 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 		//If channel creation succeeds continue
 		if ($result['success'] === TRUE){
 			
-			echo 'Channel: '.$array['channel_name'].' - successfully created';
+			echo json_encode(array('status' => 'error', 'message' => 'Channel: '.$array['channel_name'].' - successfully created'));
 			
 			setPerms($tsAdminF, $result, $perms);
 			
 		//If channel creation fails echo error
 		} else {
-			echo 'Function Error: Channel creation failure';
+			echo json_encode(array('status' => 'error', 'message' => 'Function Error: Channel creation failure'));
 		}
 		return $result;
 			
@@ -178,13 +186,13 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 		//If channel creation succeeds continue
 		if ($result['success'] === TRUE){
 			
-			echo 'Channel: '.$array['channel_name'].' - successfully created';
+			echo json_encode(array('status' => 'error', 'message' => 'Channel spacer successfully created'));
 			
 			setPerms($tsAdminF, $result, $Fpermissions_deafult);
 			
 		//If channel creation fails echo error
 		} else {
-			echo 'Function Error: Spacer creation failure';
+			echo json_encode(array('status' => 'error', 'message' => 'Function Error: Spacer creation failure'));
 		}
 		return $result;
 			
@@ -200,10 +208,10 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 		//If set perms fails echo error
 		if($result['success'] === TRUE){
 			
-			echo ' and permissions successfully set <br>';
+			echo json_encode(array('status' => 'error', 'message' => 'With permissions successfully set'));
 			
 		} else {
-			echo ' Function Error: Channel set permission failure <br>'; //	
+			echo json_encode(array('status' => 'error', 'message' => 'Function Error: Channel set permission failure'));
 		}
 	}
 	
@@ -242,7 +250,7 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 			 	}
 			}
 		} else {
-			echo ' Function Error: Could not populate ($clientsarray) with provided server Group ID<br>';
+			echo json_encode(array('status' => 'error', 'message' => 'Function Error: Could not populate ($clientsarray) with provided server Group ID'));
 		}
 	}
 
@@ -261,4 +269,8 @@ if(count($tsAdmin->getDebugLog()) > 0) {
 }
 
 #Logout
-$tsAdmin->logout();	
+$tsAdmin->logout();
+
+} else {
+    echo json_encode(array('status' => 'error', 'message' => 'Error communcating with the server, please try again later.'));
+}
