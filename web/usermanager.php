@@ -35,8 +35,6 @@ $channel_deafults = array(
  	);
  		
 $permissions_deafult = array(
-	"i_channel_needed_join_power" => '35',
-	"i_channel_needed_modify_power" => '75',
 	"i_channel_needed_delete_power" => '75',
 	"i_channel_needed_permission_modify_power" => '70'
 	);
@@ -94,11 +92,10 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 			
 			//If first channel create Master-Parent channel
 			if ($key == 0) {
-				//Create Top Spacer
-				createSpacer($tsAdmin);
+				
 				//Create Channel Function: Create channel + record channels CID for parenting
 				$parent_id = createChannel($tsAdmin, $merged_array, $permissions_deafult);
-				//moveClients($tsAdmin, $parent_id);
+				moveClients($tsAdmin, $parent_id);
 				
 			//Create sub-channels of Master-Parent channel
 			} else {
@@ -110,8 +107,6 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 				createChannel($tsAdmin, $merged_array, $permissions_deafult); //Will require an extra IF check to see if channel is also a parent channel!
 			}
 		}
-		//Create Bottom Spacer
-		createSpacer($tsAdmin);
 	
 	} else {
 		echo 'API Error: No channel information has been entered, cannot create channels <br>';
@@ -151,44 +146,6 @@ if($tsAdmin->getElement('success', $tsAdmin->connect())) {
 			
 	}
 	
-	//Create Channel Function (TS_Object, Channel_Information, Channel_Permissions)
-	function createSpacer($tsAdminF) {
-		
-		$n = rand (0, 9999);
-		
-		$Fchannel_deafults = array(
-			"channel_flag_permanent" => 1,
-			"channel_name" => '[*cspacer'.$n.']_',
-        	"channel_topic" => 'Spacer',
-			"channel_max_users" => 0,
- 			"channel_flag_maxclients_unlimited" => 2,
- 			"channel_flag_maxfamilyclients_unlimited" => 2,
- 			"channel_codec" => 1,
- 			"channel_codec_quality" => 1
- 		);
- 		
-		$Fpermissions_deafult = array(
-			"i_channel_needed_delete_power" => '75',
-			"i_channel_needed_permission_modify_power" => '70'
-	);
-		
-		//Create + Record the created channel's CID
-		$result = $tsAdminF->channelCreate($Fchannel_deafults);
-		
-		//If channel creation succeeds continue
-		if ($result['success'] === TRUE){
-			
-			echo 'Channel: '.$array['channel_name'].' - successfully created';
-			
-			setPerms($tsAdminF, $result, $Fpermissions_deafult);
-			
-		//If channel creation fails echo error
-		} else {
-			echo 'Function Error: Spacer creation failure';
-		}
-		return $result;
-			
-	}
 	
 	//Set Permissions Function (TS_Object, Channel_ID, Channel_Permissions)
 	function setPerms($tsAdminF, $cid, $perms) {
