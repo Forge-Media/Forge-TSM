@@ -35,13 +35,13 @@ forge.factory("ChannelFactory", function ($http) {
 
     return {
         createChannels: function (data) {
-           // var res;
+            // var res;
             $.post("core.php", {"data": data}, function (response) {
                 //console.log(response);
-                //res = response;
+                return response;
             });
 
-           //return res;
+            //return res;
 
         }
     };
@@ -64,9 +64,7 @@ forge.controller('ChannelCtrl', ['$scope', 'ChannelFactory', function ($scope, C
     //    'nodes': []
     //};
 
-    $scope.treeOptions = {
-
-    };
+    $scope.treeOptions = {};
 
     $scope.currentItem = null;
 
@@ -121,8 +119,6 @@ forge.controller('ChannelCtrl', ['$scope', 'ChannelFactory', function ($scope, C
     };
 
     $scope.valiadateChannelNameLength = function (data) {
-        console.log($scope.depth());
-
         if (data.title.length > 40 || data.title.length < 3) {
             data.namelengtherror = "Please ensure the channel name is <strong>between 3 and 40 characters</strong>";
         } else {
@@ -131,8 +127,6 @@ forge.controller('ChannelCtrl', ['$scope', 'ChannelFactory', function ($scope, C
     };
 
     $scope.valiadateChannelTopicLength = function (data) {
-        console.log(data.topic.length);
-
         if (data.topic.length > 8192) {
             data.topiclengtherror = "Please ensure the channel topic has no more than <strong>8192 characters</strong>";
         } else {

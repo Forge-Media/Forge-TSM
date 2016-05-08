@@ -2,7 +2,7 @@
 [![DevDependencies](https://david-dm.org/Forge-Media/Forge-TSM.svg)](https://david-dm.org/Forge-Media/Forge-TSM.svg)
 [![Heroku](http://heroku-badge.herokuapp.com/?app=forge-tsm&style=flat)](http://heroku-badge.herokuapp.com/?app=forge-tsm=&style=flat)
 
-# ForgeTSM 0.1.0 *Development*
+# ForgeTSM 0.2.0 *Development*
 ## For development purposes only (Based on heroku-multipack-nodejs-php-example)
 
 ### By Jeremy Paton & Marc Berman
@@ -32,6 +32,12 @@ How it works
 3. The Node.js buildpack makes its binaries available to the next buildpack in the chain
 4. The PHP buildpack runs and installs dependencies using Composer
 5. As part of the composer install step, the `post-install-cmd` scripts run
-1. That executes `$(npm bin -q)/bower install` - `bower install` would work too, as `node_modules/.bin` is on `$PATH` on Heroku, but it would likely not work on local development environments, hence the more portable use of prefixing the result from `npm bin -q` to retrieve said directory name.
-1. Bower installs Bootstrap
-1. Done!
+6. That executes `$(npm bin -q)/bower install` - `bower install` would work too, as `node_modules/.bin` is on `$PATH` on Heroku, but it would likely not work on local development environments, hence the more portable use of prefixing the result from `npm bin -q` to retrieve said directory name.
+7. Bower installs Bootstrap
+8. Done!
+
+
+Change Log - v0.2.0
+-------------------
+
+[Older changes](CHANGELOG.md)

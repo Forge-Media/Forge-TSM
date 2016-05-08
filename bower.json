@@ -3,6 +3,7 @@
   "description": "Simple web-front which allows the creation of channels on a Teamspeak 3 server.",
   "dependencies": {
     "angular-bootstrap": "*",
-    "bootstrap": "*"
+    "bootstrap": "*",
+    "angular-ui-tree": "*"
   }
 }
