@@ -16,7 +16,7 @@ Change Log - v0.2.0 (Front End Alpha release)
 
 #### Core (web/core.php):
 - [x] createSpacer - Working as intended
-- [x] moveClients - Implemeted but <p style='color:red'>not active</p> (Requires testing)
+- [x] moveClients - Implemeted but **not active** (Requires testing)
 
 ## Forge-TSM Install:
 - [x] Requires IDE deployment to Heroku due to Config.php setup requirements
