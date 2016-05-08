@@ -22,6 +22,12 @@ forge.controller('TeamspeakCtrl', ['$scope', function ($scope) {
         'nodes': []
     };
 
+    $scope.FieldValid = true;
+
+    $scope.fieldValidator = function () {
+
+    };
+
     $scope.remove = function (scope) {
         scope.remove();
     };
@@ -38,10 +44,6 @@ forge.controller('TeamspeakCtrl', ['$scope', function ($scope) {
     $scope.visible = function (item) {
         return !($scope.query && $scope.query.length > 0
         && item.title.indexOf($scope.query) == -1);
-
-    };
-
-    $scope.findNodes = function () {
 
     };
 
