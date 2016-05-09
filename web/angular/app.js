@@ -14,39 +14,28 @@ var forge = angular.module('forgeApp', ['ui.tree', 'ngRoute', 'ui.bootstrap'])
     }]);
 
 
-forge.factory("ChannelFactory", function ($http) {
-    var requestApi = {
-        http: function (methode, location, data) {
-            if (methode === "GET") {
-                return $http({
-                    method: methode,
-                    url: location
-                });
-            }
-            if (methode === "POST") {
-                return $http({
-                    method: methode,
-                    url: location,
-                    data: data
-                });
-            }
-        }
-    };
-
+forge.factory('ChannelFactory', ['$http', '$rootScope', function ($http, $rootScope) {
     return {
         createChannels: function (data) {
-            // var res;
-            $.post("core.php", {"data": data}, function (response) {
-                //console.log(response);
-                return response;
-            });
+            return $http({
+                headers: {'Content-Type': 'application/json'},
+                url: 'core.php',
+                method: "POST",
+                data: {"data": data},
+            })
+                .success(function (addData) {
+                    return addData;
+                    //$rootScope.$broadcast('handleSharedBooks',books);
+                });
 
-            //return res;
 
+            //$http.post("core.php", {"data": data}, function (response) {
+            //    console.log(response);
+            //    return response;
+            //});
         }
     };
-
-});
+}]);
 
 forge.filter('to_trusted', ['$sce', function ($sce) {
     return function (text) {
@@ -56,17 +45,9 @@ forge.filter('to_trusted', ['$sce', function ($sce) {
 
 
 forge.controller('ChannelCtrl', ['$scope', 'ChannelFactory', function ($scope, ChannelFactory) {
-    //$scope.maxDepth = 2;
-    //$scope.currentItem = {
-    //    'id': '',
-    //    'title': '',
-    //    'topic': '',
-    //    'nodes': []
-    //};
-
-    $scope.treeOptions = {};
 
     $scope.currentItem = null;
+    $scope.loader = false;
 
     $scope.remove = function (scope) {
         scope.remove();
@@ -101,21 +82,22 @@ forge.controller('ChannelCtrl', ['$scope', 'ChannelFactory', function ($scope, C
             });
             counter++;
 
-            console.log(counter);
             for (var k = 0; k < processdata[i].nodes.length; k++) {
                 passedData.push({
                     'channel_name': processdata[i].nodes[k].title,
                     'channel_topic': processdata[i].nodes[k].topic
                 });
                 counter++;
-                console.log(counter);
             }
         }
 
-        ChannelFactory.createChannels(passedData);
-        //    .then(function (response) {
-        //    $scope.output = response;
-        //});
+        $scope.loader = true;
+        ChannelFactory.createChannels(passedData)
+            .then(function (response) {
+                console.log(response);
+                $scope.loader = false;
+                $scope.output = response.data;
+            });
     };
 
     $scope.valiadateChannelNameLength = function (data) {
