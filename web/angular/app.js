@@ -1,12 +1,12 @@
 var forge = angular.module('forgeApp', ['ui.tree', 'ngRoute', 'ui.bootstrap'])
     .config(['$routeProvider', '$compileProvider', function ($routeProvider, $compileProvider) {
         $routeProvider
-            .when('/forge/web/index.html', {
+            .when('channelcreate', {
                 controller: 'ChannelCtrl',
                 templateUrl: 'angular/views/channel-tree.html'
             })
             .otherwise({
-                redirectTo: '/forge/web/index.html'
+                redirectTo: 'channelcreate'
             });
 
         // testing issue #521
