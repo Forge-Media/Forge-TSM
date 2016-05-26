@@ -25,14 +25,7 @@ forge.factory('ChannelFactory', ['$http', '$rootScope', function ($http, $rootSc
             })
                 .success(function (addData) {
                     return addData;
-                    //$rootScope.$broadcast('handleSharedBooks',books);
                 });
-
-
-            //$http.post("core.php", {"data": data}, function (response) {
-            //    console.log(response);
-            //    return response;
-            //});
         }
     };
 }]);
